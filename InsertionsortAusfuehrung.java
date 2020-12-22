@@ -12,17 +12,17 @@ public class InsertionsortAusfuehrung {
 	public static void main(String[] args) {
 		arrayAufsteigendBefuellen();
 		bubblesort(arr);
-		binaryInsertionSort(arr);
+		binaerInsertionSort(arr);
 		ausgabeSortiert();
 		
 		arrayAbsteigendBefuellen();
 		bubblesort(arr);
-		binaryInsertionSort(arr);
+		binaerInsertionSort(arr);
 		ausgabeUnsortiert();
 		
 		arrayZufallBefuellen();
 		bubblesort(arr);
-		binaryInsertionSort(arr);
+		binaerInsertionSort(arr);
 		ausgabeZufall();
 	}
 	
@@ -46,18 +46,6 @@ public class InsertionsortAusfuehrung {
 		}
 	}
 	
-	/*public static void insertionsort() {
-		final long timeStart = System.currentTimeMillis();
-		 for (int i=1; i<arr.length; i++)
-	        {
-	            int j=i;
-	            int t=arr[j];
-	            arr[binaerSuche(arr[0] ,j, t-1)] = t;
-	        }
-		 final long timeEnd = System.currentTimeMillis();
-		 zeitInsertionsort = timeEnd - timeStart;
-	}*/
-	
 	public static void bubblesort(int[] arr) {
 		final long timeStart = System.currentTimeMillis();
 		for(int i = 0; i<arr.length; i++) {
@@ -73,30 +61,13 @@ public class InsertionsortAusfuehrung {
 		zeitBubblesort = timeEnd-timeStart;
 	}
 	
-	/*public static int binaerSuche(int anfang, int ende, int gesZahl) {
-		while(anfang <= ende) {	
-			int mitte = anfang + ((ende - anfang)/2);
-			if(arr[mitte] == gesZahl) {
-				stelle = mitte;
-				return stelle;
-			}
-			if(gesZahl < arr[mitte]) {
-				ende = mitte;
-			} 
-			if(gesZahl > arr[mitte]) {
-				anfang = mitte;
-			}
-		}
-		return 0;
-	}*/
-	
-	public static void binaryInsertionSort(int[] nums) {
+	public static void binaerInsertionSort(int[] nums) {
 		final long timeStart = System.currentTimeMillis();
 	    int length = nums.length;
 
 	    for (int i = 1; i < length; ++i) {
 	        int key = nums[i];
-	        int insertedPosition = findPosition(nums, 0, i - 1, key);
+	        int insertedPosition = findePosition(nums, 0, i - 1, key);
 
 	        for (int j = i - 1; j >= insertedPosition; --j) {
 	            nums[j + 1] = nums[j];
@@ -105,15 +76,15 @@ public class InsertionsortAusfuehrung {
 	        nums[insertedPosition] = key;
 	    }
 	    final long timeEnd = System.currentTimeMillis();
-		zeitBubblesort = timeEnd-timeStart;
+		zeitInsertionsort = timeEnd-timeStart;
 	}
 
-	public static int findPosition(int[] nums, int start, int end, int key) {
-	    while (start <= end) {
-	        int mid = start + (end - start) / 2;
+	public static int findePosition(int[] nums, int start, int ende, int key) {
+	    while (start <= ende) {
+	        int mid = start + (ende - start) / 2;
 
 	        if (key < nums[mid]) {
-	            end = mid - 1;
+	            ende = mid - 1;
 	        } else {
 	            start = mid + 1;
 	        }
