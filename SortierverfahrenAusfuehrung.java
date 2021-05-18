@@ -4,6 +4,7 @@ public class SortierverfahrenAusfuehrung {
     private static int versuche = 5;
     private static int laenge = 50000;
     private static int[] arr = new int[laenge];
+    private static int[] arrBackup = new int[laenge];
 
     private static long zeitInsertionsort;
     private static long zeitBubblesort;
@@ -24,18 +25,19 @@ public class SortierverfahrenAusfuehrung {
     private static String dritteZeit = "";
 
     public static void main(String[] args) {
+        arrayZufallBefuellen();
 
         for(int i = 0; i < versuche; i ++) {
-            arrayZufallBefuellen();
+            arrayBackup();
             bubblesort(arr);
 
-            arrayZufallBefuellen();
+            arrayBackup();
             insertionsort(arr);
 
-            arrayZufallBefuellen();
+            arrayBackup();
             selectionsort(arr);
 
-            arrayZufallBefuellen();
+            arrayBackup();
             quickSort(arr, 0, arr.length -1);
         }
         avgBerechnen();
@@ -49,6 +51,13 @@ public class SortierverfahrenAusfuehrung {
 
         for(int i = 0; i<arr.length; i++) {
             arr[i] = wuerfel.nextInt(laenge);
+            arrBackup[i] = arr[i];
+        }
+    }
+
+    public static void arrayBackup(){
+        for(int i = 0; i<arr.length; i++){
+            arr[i] = arrBackup[i];
         }
     }
 
