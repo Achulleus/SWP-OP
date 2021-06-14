@@ -10,6 +10,7 @@ public class SortierverfahrenAusfuehrung {
     private static long zeitBubblesort;
     private static long zeitSelectionsort;
     private static long zeitQuicksort;
+    private static long zeitMerchsort;
 
     private static int bubbleVergleich = 0;
     private static int bubbleTausch = 0;
@@ -19,6 +20,8 @@ public class SortierverfahrenAusfuehrung {
     private static int selectionTausch = 0;
     private static int quickVergleich = 0;
     private static int quickTausch = 0;
+    private static int merchVergleich = 0;
+    private static int merchTausch = 0;
 
     private static String ersteZeit = "";
     private static String zweiteZeit = "";
@@ -39,6 +42,9 @@ public class SortierverfahrenAusfuehrung {
 
             arrayBackup();
             quickSort(arr, 0, arr.length -1);
+
+            arrayBackup();
+            merchSort(arr, 0, arr.length -1);
         }
         avgBerechnen();
         vergleich();
@@ -157,11 +163,50 @@ public class SortierverfahrenAusfuehrung {
         zeitQuicksort = zeitQuicksort + (timeEnd - timeStart);
     }
 
+    public static int[] merchSort(int[]intArr ,int l, int r) {
+        final long timeStart = System.currentTimeMillis();
+        if (l < r) {
+            int q = (l + r) / 2;
+
+            merchSort(intArr, l, q);
+            merchSort(intArr ,q + 1, r);
+            merge(intArr, l, q, r);
+        }
+        final long timeEnd = System.currentTimeMillis();
+        zeitMerchsort = zeitMerchsort + (timeEnd - timeStart);
+        return intArr;
+    }
+
+    public static void merge(int[]intArr ,int l, int q, int r) {
+        int[] arr = new int[intArr.length];
+        int i, j;
+        for (i = l; i <= q; i++) {
+            arr[i] = intArr[i];
+        }
+        for (j = q + 1; j <= r; j++) {
+            arr[r + q + 1 - j] = intArr[j];
+        }
+        i = l;
+        j = r;
+        for (int k = l; k <= r; k++) {
+            merchVergleich ++;
+            if (arr[i] <= arr[j]) {
+                merchTausch ++;
+                intArr[k] = arr[i];
+                i++;
+            } else {
+                intArr[k] = arr[j];
+                j--;
+            }
+        }
+    }
+
     public static void avgBerechnen() {
         zeitBubblesort = zeitBubblesort / versuche;
         zeitInsertionsort = zeitInsertionsort / versuche;
         zeitSelectionsort = zeitSelectionsort / versuche;
         zeitQuicksort = zeitQuicksort/  versuche;
+        zeitMerchsort = zeitMerchsort / versuche;
 
         bubbleVergleich = bubbleVergleich / versuche;
         bubbleTausch = bubbleTausch / versuche;
@@ -174,6 +219,9 @@ public class SortierverfahrenAusfuehrung {
 
         quickVergleich = quickVergleich / versuche;
         quickTausch = quickTausch / versuche;
+
+        merchVergleich = merchVergleich / versuche;
+        merchTausch = merchTausch / versuche;
     }
 
     public static void vergleich() {
