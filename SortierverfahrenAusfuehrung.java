@@ -277,6 +277,9 @@ public class SortierverfahrenAusfuehrung {
         System.out.println("Quicksort:");
         System.out.println("Zeit: " + zeitQuicksort + " Vergleiche: " + quickVergleich + "Tauschungen: " +  quickTausch);
 
+        System.out.println("Merchsort:");
+        System.out.println("Zeit: " + zeitMerchsort + " Vergleiche: " + merchVergleich + "Tauschungen: " +  merchTausch);
+
         System.out.println("Rangliste:");
         System.out.println("1. Quicksort");
         System.out.println("2. " + ersteZeit);
